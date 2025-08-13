@@ -55,6 +55,7 @@
             font-size: 1.1rem;
             max-width: 800px;
             margin: 10px auto;
+            padding: 0 15px;
         }
         
         .image-section {
@@ -90,6 +91,7 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
         
         .fight-images {
@@ -105,6 +107,7 @@
             border-radius: 8px;
             box-shadow: 0 6px 16px rgba(0,0,0,0.15);
             transition: transform 0.3s ease;
+            max-width: 100%;
         }
         
         .fight-images img:hover {
@@ -118,6 +121,7 @@
         
         .winner-image img {
             width: 350px;
+            max-width: 100%;
             border-radius: 8px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
@@ -146,6 +150,7 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
         
         .day-card {
@@ -171,6 +176,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         
         .subject-card {
@@ -197,6 +203,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         
         .subject-module {
@@ -240,6 +247,7 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         
         .notification {
@@ -251,6 +259,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: transform 0.2s ease;
+            flex-wrap: wrap;
         }
         
         .notification:hover {
@@ -265,6 +274,7 @@
         
         .notification-content {
             flex: 1;
+            min-width: 200px;
         }
         
         .notification-time {
@@ -282,6 +292,7 @@
         .subject-card-image {
             position: relative;
             width: 350px;
+            max-width: 100%;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
@@ -314,6 +325,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             font-size: 16px;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
         
         .subject-button:hover {
@@ -400,6 +412,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
         
         .progress-bars {
@@ -415,6 +428,7 @@
             justify-content: space-between;
             margin-bottom: 8px;
             font-weight: 500;
+            flex-wrap: wrap;
         }
         
         .progress-bar {
@@ -445,6 +459,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
         
         .resource-cards {
@@ -472,6 +487,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         
         .resource-card p {
@@ -525,6 +541,15 @@
         }
         
         @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+                padding: 0 15px;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
             .image-section {
                 flex-direction: column;
             }
@@ -532,11 +557,23 @@
             .image-section img {
                 width: 100%;
                 margin-bottom: 15px;
+                height: auto;
+            }
+            
+            .fight-title {
+                font-size: 1.5rem;
+                gap: 10px;
             }
             
             .fight-images {
                 flex-direction: column;
                 align-items: center;
+                gap: 20px;
+            }
+            
+            .fight-images img {
+                width: 100%;
+                max-width: 300px;
             }
             
             .winner-image img {
@@ -551,6 +588,83 @@
             
             .time-allocation {
                 width: 100%;
+            }
+            
+            .notification {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .notification-time {
+                margin-left: 0;
+            }
+            
+            .subject-card-image {
+                width: 100%;
+            }
+            
+            .subject-button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .study-plan h2,
+            .progress-section h3,
+            .resources-section h3,
+            .reminders h3 {
+                font-size: 1.5rem;
+            }
+            
+            .day-header {
+                font-size: 1.1rem;
+            }
+            
+            .subject-name {
+                font-size: 1rem;
+            }
+            
+            .time-block {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .resource-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .fight-title {
+                font-size: 1.2rem;
+            }
+            
+            .study-plan,
+            .progress-section,
+            .resources-section,
+            .reminders {
+                padding: 20px;
+            }
+            
+            .day-card {
+                padding: 15px;
+            }
+            
+            .subject-card {
+                padding: 12px;
+            }
+            
+            .subject-info {
+                min-width: 100%;
+            }
+            
+            .time-block {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -703,7 +817,16 @@
             </div>
         </div>
         
-       
+        <footer>
+            <p>© 2023 Academic Excellence Plan</p>
+            <p>Designed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for students</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </footer>
     </div>
 
     <script>
