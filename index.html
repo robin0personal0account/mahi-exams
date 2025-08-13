@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Plan Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --marketing: #4285f4;
+            --stats: #0f9d58;
+            --macro: #db4437;
+            --banking: #f4b400;
+            --communication: #9c27b0;
+            --leadership: #00bcd4;
+            --yoga: #8bc34a;
+            --mixed: #607d8b;
+            --all: #795548;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 2.5rem;
+        }
+        
+        header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 10px auto;
+        }
+        
+        .image-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        
+        .image-section img {
+            width: 48%;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            object-fit: cover;
+            height: 300px;
+        }
+        
+        .fight-section {
+            text-align: center;
+            margin: 40px 0;
+            background-color: var(--light-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .fight-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .fight-images {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .fight-images img {
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .fight-images img:hover {
+            transform: scale(1.05);
+        }
+        
+        .winner-image {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .winner-image img {
+            width: 350px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #2c3e50 50%, transparent 100%);
+            margin: 50px 0;
+            border: none;
+        }
+        
+        .study-plan {
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .study-plan h2 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .day-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            border-left: 6px solid #4a6bdf;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        .day-header {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #4a6bdf;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .subject-card {
+            background-color: #f5f7ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .subject-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .subject-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .subject-module {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .time-allocation {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .time-block {
+            background-color: #e0e6ff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .reminders {
+            background-color: #fff8e6;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 40px 0;
+            box-shadow: var(--card-shadow);
+            border-left: 6px solid #ffc107;
+        }
+        
+        .reminders h3 {
+            margin-top: 0;
+            color: #ff9800;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .notification {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+        
+        .notification:hover {
+            transform: translateX(5px);
+        }
+        
+        .notification i {
+            margin-right: 12px;
+            color: #ff9800;
+            font-size: 18px;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-time {
+            font-size: 13px;
+            color: #95a5a6;
+            margin-left: 15px;
+        }
+        
+        .card-section {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        
+        .subject-card-image {
+            position: relative;
+            width: 350px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .subject-card-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .subject-card-image img {
+            width: 100%;
+            display: block;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .subject-button {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4a6bdf;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .subject-button:hover {
+            background-color: #3a5bd9;
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        /* Subject colors */
+        .marketing {
+            border-left-color: var(--marketing);
+        }
+        .marketing .subject-name {
+            color: var(--marketing);
+        }
+        
+        .stats {
+            border-left-color: var(--stats);
+        }
+        .stats .subject-name {
+            color: var(--stats);
+        }
+        
+        .macro {
+            border-left-color: var(--macro);
+        }
+        .macro .subject-name {
+            color: var(--macro);
+        }
+        
+        .banking {
+            border-left-color: var(--banking);
+        }
+        .banking .subject-name {
+            color: var(--banking);
+        }
+        
+        .communication {
+            border-left-color: var(--communication);
+        }
+        .communication .subject-name {
+            color: var(--communication);
+        }
+        
+        .leadership {
+            border-left-color: var(--leadership);
+        }
+        .leadership .subject-name {
+            color: var(--leadership);
+        }
+        
+        .yoga {
+            border-left-color: var(--yoga);
+        }
+        .yoga .subject-name {
+            color: var(--yoga);
+        }
+        
+        .mixed {
+            border-left-color: var(--mixed);
+        }
+        .mixed .subject-name {
+            color: var(--mixed);
+        }
+        
+        .all {
+            border-left-color: var(--all);
+        }
+        .all .subject-name {
+            color: var(--all);
+        }
+        
+        .progress-section {
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .progress-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .progress-bars {
+            margin-top: 20px;
+        }
+        
+        .progress-item {
+            margin-bottom: 20px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .resources-section {
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .resources-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .resource-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-card h4 {
+            margin-top: 0;
+            color: #4a6bdf;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resource-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #4a6bdf;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .resource-link:hover {
+            background-color: #3a5bd9;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 10px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #4a6bdf;
+        }
+        
+        @media (max-width: 768px) {
+            .image-section {
+                flex-direction: column;
+            }
+            
+            .image-section img {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .fight-images {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .winner-image img {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .subject-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .time-allocation {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-graduation-cap"></i> Academic Excellence Plan</h1>
+            <p>A comprehensive 15-day study program designed to maximize your learning efficiency and exam performance</p>
+        </header>
+        
+        <div class="image-section">
+            <img src="https://i.pinimg.com/736x/01/bb/5c/01bb5c90c5e62734ef1ac83747c33f08.jpg" alt="Study Inspiration">
+            <img src="https://i.pinimg.com/1200x/7f/39/78/7f3978bcf60625f5d219df23f11e868f.jpg" alt="Learning Process">
+        </div>
+        
+        <div class="fight-section">
+            <div class="fight-title">
+                <i class="fas fa-fist-raised"></i> EPIC SHOWDOWN: THEORY vs MATHEMATICS <i class="fas fa-calculator"></i>
+                <br>AND THE WINNER IS... THEORY! <i class="fas fa-trophy"></i>
+            </div>
+            <div class="fight-images">
+                <img src="https://i.pinimg.com/736x/bd/25/ca/bd25ca3e98a4b036c126f5c278552422.jpg" alt="Theory Champion">
+                <img src="https://i.pinimg.com/736x/4a/ef/59/4aef59f6e81dcb4dc382c7e2eaf4a14a.jpg" alt="Maths Challenger">
+            </div>
+            <div class="winner-image">
+                <img src="https://i.pinimg.com/1200x/53/bf/02/53bf023f3baed7ecf6a917a99c52b767.jpg" alt="Theory Victory">
+                <p style="margin-top: 15px; font-weight: bold; font-size: 18px;">Theory dominates with conceptual mastery and real-world applications!</p>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="progress-section">
+            <h3><i class="fas fa-chart-line"></i> Study Progress Tracker</h3>
+            <div class="progress-bars">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>Marketing</span>
+                        <span>65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%; background-color: var(--marketing);"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>Business Statistics</span>
+                        <span>45%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%; background-color: var(--stats);"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>Macroeconomics</span>
+                        <span>55%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 55%; background-color: var(--macro);"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>Banking & Financial Services</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%; background-color: var(--banking);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="study-plan">
+            <h2><i class="fas fa-calendar-alt"></i> 15-Day Intensive Study Plan</h2>
+            
+            <div id="studyPlanContainer">
+                <!-- Study plan will be inserted here by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="resources-section">
+            <h3><i class="fas fa-book-open"></i> Recommended Resources</h3>
+            <div class="resource-cards">
+                <div class="resource-card">
+                    <h4><i class="fas fa-chart-pie"></i> Marketing Essentials</h4>
+                    <p>Comprehensive guide covering all marketing principles with case studies and real-world examples.</p>
+                    <a href="#" class="resource-link">Access Resource</a>
+                </div>
+                <div class="resource-card">
+                    <h4><i class="fas fa-calculator"></i> Statistics Workbook</h4>
+                    <p>500+ practice problems with detailed solutions for all statistical concepts in the syllabus.</p>
+                    <a href="#" class="resource-link">Access Resource</a>
+                </div>
+                <div class="resource-card">
+                    <h4><i class="fas fa-money-bill-wave"></i> Macroeconomics Videos</h4>
+                    <p>Video series explaining complex macroeconomic theories with visualizations and examples.</p>
+                    <a href="#" class="resource-link">Access Resource</a>
+                </div>
+                <div class="resource-card">
+                    <h4><i class="fas fa-university"></i> Banking Regulations</h4>
+                    <p>Updated guide to financial systems and regulatory bodies with practice MCQs.</p>
+                    <a href="#" class="resource-link">Access Resource</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reminders">
+            <h3><i class="fas fa-bell"></i> Reminders & Notifications</h3>
+            <div class="notification">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="notification-content">
+                    <strong>Stats practice session starts in 10 minutes!</strong>
+                    <p>Prepare your materials and problem sets</p>
+                </div>
+                <div class="notification-time">10:00 AM</div>
+            </div>
+            <div class="notification">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="notification-content">
+                    <strong>Marketing revision due in 1 hour</strong>
+                    <p>Module II - Consumer Behavior concepts</p>
+                </div>
+                <div class="notification-time">2:30 PM</div>
+            </div>
+            <div class="notification">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="notification-content">
+                    <strong>Macroeconomics mock test tomorrow at 9 AM</strong>
+                    <p>Covering Modules I-III, 2 hour duration</p>
+                </div>
+                <div class="notification-time">Tomorrow</div>
+            </div>
+            <div class="notification">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="notification-content">
+                    <strong>Yoga practice session this evening</strong>
+                    <p>Focus on breathing techniques and relaxation</p>
+                </div>
+                <div class="notification-time">6:00 PM</div>
+            </div>
+        </div>
+        
+        <div class="card-section">
+            <div class="subject-card-image">
+                <img src="https://i.pinimg.com/1200x/ea/09/2a/ea092a53d8ef35ccda8d5adcf110898a.jpg" alt="Macroeconomics Concepts">
+                <button class="subject-button">Explore Macroeconomics</button>
+            </div>
+        </div>
+        
+       
+    </div>
+
+    <script>
+        const studyPlan = {
+          "study_plan": [
+            {
+              "day": 1,
+              "date": "2023-11-01",
+              "subjects": [
+                {
+                  "name": "Marketing",
+                  "module": "Module I - Basics, Marketing Mix, Environment",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Textbook Ch.1-3", "Case Study #1"],
+                  "objectives": ["Understand marketing fundamentals", "Learn 4Ps framework"]
+                },
+                {
+                  "name": "Business Statistics",
+                  "module": "Module I - Central Tendency, Dispersion",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Workbook Pg.1-25", "Online Quiz #1"],
+                  "objectives": ["Calculate mean/median/mode", "Understand variance/SD"]
+                }
+              ],
+              "daily_tip": "Start with the most challenging subject first when your energy is highest."
+            },
+            {
+              "day": 2,
+              "date": "2023-11-02",
+              "subjects": [
+                {
+                  "name": "Macroeconomics",
+                  "module": "Module I - Intro, National Income, GDP",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Video Lectures 1-3", "GDP Calculation Exercises"],
+                  "objectives": ["Define macroeconomics scope", "Calculate GDP methods"]
+                },
+                {
+                  "name": "Banking & Financial Services",
+                  "module": "Module I - Financial System, Regulatory Bodies",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Regulatory Handbook", "Current Affairs Notes"],
+                  "objectives": ["Map financial system components", "List key regulators"]
+                }
+              ],
+              "daily_tip": "Use the Pomodoro technique (25min study + 5min break) for better focus."
+            },
+            {
+              "day": 3,
+              "date": "2023-11-03",
+              "subjects": [
+                {
+                  "name": "Marketing",
+                  "module": "Module II - Consumer Behaviour, STP",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Consumer Case Studies", "Segmentation Exercises"],
+                  "objectives": ["Analyze buyer decision process", "Practice STP models"]
+                },
+                {
+                  "name": "Business Statistics",
+                  "module": "Module II - Correlation, Regression",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Correlation Problems", "Regression Calculator"],
+                  "objectives": ["Calculate r value", "Interpret regression lines"]
+                }
+              ],
+              "daily_tip": "Create visual mind maps for theoretical concepts to improve recall."
+            },
+            {
+              "day": 4,
+              "date": "2023-11-04",
+              "subjects": [
+                {
+                  "name": "Macroeconomics",
+                  "module": "Module II - Keynesian Thoughts, Consumption/Investment Function",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Keynesian Models", "Consumption Graphs"],
+                  "objectives": ["Understand Keynesian theory", "Plot consumption function"]
+                },
+                {
+                  "name": "Banking & Financial Services",
+                  "module": "Module II - Banking Structure, Modern Services, CAMELS",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Banking Types Chart", "CAMELS Rating System"],
+                  "objectives": ["Compare banking structures", "Apply CAMELS framework"]
+                }
+              ],
+              "daily_tip": "Teach concepts to an imaginary student to identify knowledge gaps."
+            },
+            {
+              "day": 5,
+              "date": "2023-11-05",
+              "subjects": [
+                {
+                  "name": "Marketing",
+                  "module": "Module III - Marketing Strategy, New Product Development",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Strategy Templates", "NPD Case Studies"],
+                  "objectives": ["Develop BCG matrix", "Analyze product lifecycle"]
+                },
+                {
+                  "name": "Business Statistics",
+                  "module": "Module III - Probability, Distributions",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Probability Problems", "Distribution Tables"],
+                  "objectives": ["Solve probability questions", "Identify distribution types"]
+                }
+              ],
+              "daily_tip": "Schedule difficult topics for your peak productivity hours."
+            },
+            {
+              "day": 6,
+              "date": "2023-11-06",
+              "subjects": [
+                {
+                  "name": "Macroeconomics",
+                  "module": "Module III - Money, Inflation, Unemployment, Business Cycle",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Inflation Charts", "Business Cycle Graphs"],
+                  "objectives": ["Analyze inflation causes", "Map business cycle phases"]
+                },
+                {
+                  "name": "Banking & Financial Services",
+                  "module": "Module III - Financial Markets (Money, Capital)",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Market Comparison", "Recent Trends Data"],
+                  "objectives": ["Differentiate market types", "Analyze current trends"]
+                }
+              ],
+              "daily_tip": "Use analogies to relate complex concepts to everyday experiences."
+            },
+            {
+              "day": 7,
+              "date": "2023-11-07",
+              "subjects": [
+                {
+                  "name": "Marketing",
+                  "module": "Module IV - Channels, Marketing Research",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Channel Diagrams", "Research Methods Guide"],
+                  "objectives": ["Design distribution channels", "Select research methods"]
+                },
+                {
+                  "name": "Business Statistics",
+                  "module": "Module IV - Hypothesis Testing, ANOVA",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Hypothesis Problems", "ANOVA Calculator"],
+                  "objectives": ["Formulate hypotheses", "Perform ANOVA tests"]
+                }
+              ],
+              "daily_tip": "Review previous day's notes before starting new material."
+            },
+            {
+              "day": 8,
+              "date": "2023-11-08",
+              "subjects": [
+                {
+                  "name": "Macroeconomics",
+                  "module": "Module IV - Macro Policy, Balance of Payments",
+                  "time_allocation": { "CL": "2.5h", "R": "0.5h" },
+                  "resources": ["Policy Frameworks", "BOP Case Studies"],
+                  "objectives": ["Evaluate policy tools", "Analyze BOP components"]
+                },
+                {
+                  "name": "Banking & Financial Services",
+                  "module": "Module IV - Financial Services, Insurance",
+                  "time_allocation": { "CL": "2.5h", "PA": "1h" },
+                  "resources": ["Services Catalog", "Insurance Principles"],
+                  "objectives": ["Compare financial services", "Understand insurance types"]
+                }
+              ],
+              "daily_tip": "Create flashcards for key definitions and formulas."
+            },
+            {
+              "day": 9,
+              "date": "2023-11-09",
+              "subjects": [
+                {
+                  "name": "Communication Skills",
+                  "module": "Modules I & II",
+                  "time_allocation": { "CL": "2h", "R": "0.5h" },
+                  "resources": ["Communication Models", "Writing Samples"],
+                  "objectives": ["Practice active listening", "Draft professional emails"]
+                },
+                {
+                  "name": "Leadership Skills",
+                  "module": "Modules I & II",
+                  "time_allocation": { "CL": "2h", "R": "0.5h" },
+                  "resources": ["Leadership Theories", "Case Analyses"],
+                  "objectives": ["Compare leadership styles", "Analyze decision-making"]
+                },
+                {
+                  "name": "Yoga",
+                  "module": "Modules I & II",
+                  "time_allocation": { "CL": "1h", "PA": "Practice" },
+                  "resources": ["Yoga Poses Guide", "Breathing Techniques"],
+                  "objectives": ["Learn basic asanas", "Practice pranayama"]
+                }
+              ],
+              "daily_tip": "Take mindful breaks to maintain mental clarity throughout the day."
+            },
+            {
+              "day": 10,
+              "date": "2023-11-10",
+              "subjects": [
+                {
+                  "name": "Communication Skills",
+                  "module": "Modules III & IV",
+                  "time_allocation": { "CL": "2h", "R": "0.5h" },
+                  "resources": ["Presentation Slides", "Negotiation Scenarios"],
+                  "objectives": ["Develop presentation skills", "Practice negotiation"]
+                },
+                {
+                  "name": "Leadership Skills",
+                  "module": "Modules III & IV",
+                  "time_allocation": { "CL": "2h", "R": "0.5h" },
+                  "resources": ["Team Dynamics", "Conflict Resolution"],
+                  "objectives": ["Analyze team stages", "Resolve conflicts"]
+                },
+                {
+                  "name": "Yoga",
+                  "module": "Modules III & IV",
+                  "time_allocation": { "CL": "1h", "PA": "Practice" },
+                  "resources": ["Advanced Asanas", "Meditation Guide"],
+                  "objectives": ["Try intermediate poses", "Begin meditation"]
+                }
+              ],
+              "daily_tip": "Record yourself explaining concepts to improve communication skills."
+            },
+            {
+              "day": 11,
+              "date": "2023-11-11",
+              "subjects": [
+                {
+                  "name": "Business Statistics",
+                  "module": "Full Syllabus Revision + 30 problems",
+                  "time_allocation": { "R": "4h" },
+                  "resources": ["Formula Sheet", "Practice Tests"],
+                  "objectives": ["Review all concepts", "Solve variety of problems"]
+                },
+                {
+                  "name": "Macroeconomics",
+                  "module": "Full Syllabus Revision + 5 case studies",
+                  "time_allocation": { "R": "4h" },
+                  "resources": ["Concept Maps", "Case Study Bank"],
+                  "objectives": ["Connect all concepts", "Apply to case studies"]
+                }
+              ],
+              "daily_tip": "Group study can be effective for solving complex problems together."
+            },
+            {
+              "day": 12,
+              "date": "2023-11-12",
+              "subjects": [
+                {
+                  "name": "Marketing",
+                  "module": "Full Revision + Case Examples",
+                  "time_allocation": { "R": "4h" },
+                  "resources": ["Marketing Mix Cards", "Brand Examples"],
+                  "objectives": ["Recall all frameworks", "Analyze brand cases"]
+                },
+                {
+                  "name": "Banking & Financial Services",
+                  "module": "Full Revision + MCQs",
+                  "time_allocation": { "R": "4h" },
+                  "resources": ["Regulatory Flashcards", "MCQ Bank"],
+                  "objectives": ["Memorize key facts", "Practice test questions"]
+                }
+              ],
+              "daily_tip": "Use the Feynman Technique to simplify and explain complex topics."
+            },
+            {
+              "day": 13,
+              "date": "2023-11-13",
+              "subjects": [
+                {
+                  "name": "Communication Skills",
+                  "module": "Writing Practice, Letters, Reports",
+                  "time_allocation": { "R": "3h" },
+                  "resources": ["Templates", "Evaluation Rubric"],
+                  "objectives": ["Draft professional documents", "Receive feedback"]
+                },
+                {
+                  "name": "Leadership Skills",
+                  "module": "Quick Notes & Examples",
+                  "time_allocation": { "R": "3h" },
+                  "resources": ["Leadership Examples", "Self-Assessment"],
+                  "objectives": ["Review key models", "Self-evaluate skills"]
+                },
+                {
+                  "name": "Yoga",
+                  "module": "Revision & Breathing Practice",
+                  "time_allocation": { "R": "1.5h" },
+                  "resources": ["Sequence Guide", "Breathing Audio"],
+                  "objectives": ["Practice full sequence", "Master breathing"]
+                }
+              ],
+              "daily_tip": "Simulate exam conditions with timed practice sessions."
+            },
+            {
+              "day": 14,
+              "date": "2023-11-14",
+              "subjects": [
+                {
+                  "name": "Mixed Subjects",
+                  "module": "Mock Test (Marketing, Stats, Macro)",
+                  "time_allocation": { "PA": "3h" },
+                  "resources": ["Previous Papers", "Answer Keys"],
+                  "objectives": ["Test knowledge", "Practice time management"]
+                },
+                {
+                  "name": "Mixed Subjects",
+                  "module": "Mock Test (Banking, Comm, Leadership)",
+                  "time_allocation": { "PA": "3h" },
+                  "resources": ["Sample Tests", "Grading Criteria"],
+                  "objectives": ["Apply all concepts", "Receive performance feedback"]
+                },
+                {
+                  "name": "Yoga",
+                  "module": "Theory Qs + Weak Point Revision",
+                  "time_allocation": { "R": "1h" },
+                  "resources": ["Theory Notes", "Q&A Bank"],
+                  "objectives": ["Review theory", "Address weak areas"]
+                }
+              ],
+              "daily_tip": "Analyze mock test results to identify final improvement areas."
+            },
+            {
+              "day": 15,
+              "date": "2023-11-15",
+              "subjects": [
+                {
+                  "name": "All Subjects",
+                  "module": "Formulas, Definitions, Key Points",
+                  "time_allocation": { "R": "3h" },
+                  "resources": ["Cheat Sheets", "Summary Notes"],
+                  "objectives": ["Final memory reinforcement", "Quick concept recall"]
+                },
+                {
+                  "name": "All Subjects",
+                  "module": "Case Studies & Examples",
+                  "time_allocation": { "R": "3h" },
+                  "resources": ["Case Bank", "Example Solutions"],
+                  "objectives": ["Review application methods", "Final practice"]
+                },
+                {
+                  "name": "Light Revision",
+                  "module": "Relax & Boost Confidence",
+                  "time_allocation": { "R": "2h" },
+                  "resources": ["Inspirational Content", "Relaxation Techniques"],
+                  "objectives": ["Reduce anxiety", "Build exam confidence"]
+                }
+              ],
+              "daily_tip": "Trust your preparation - avoid cramming new material today."
+            }
+          ]
+        };
+
+        function renderStudyPlan() {
+            const container = document.getElementById('studyPlanContainer');
+            
+            studyPlan.study_plan.forEach(dayPlan => {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'day-header';
+                dayHeader.innerHTML = `<i class="far fa-calendar-check"></i> Day ${dayPlan.day} - ${new Date(dayPlan.date).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}`;
+                dayCard.appendChild(dayHeader);
+                
+                // Add daily tip
+                if (dayPlan.daily_tip) {
+                    const tipDiv = document.createElement('div');
+                    tipDiv.style.marginBottom = '15px';
+                    tipDiv.style.padding = '10px';
+                    tipDiv.style.backgroundColor = '#e3f2fd';
+                    tipDiv.style.borderRadius = '6px';
+                    tipDiv.style.fontSize = '14px';
+                    tipDiv.innerHTML = `<strong><i class="fas fa-lightbulb"></i> Daily Tip:</strong> ${dayPlan.daily_tip}`;
+                    dayCard.appendChild(tipDiv);
+                }
+                
+                dayPlan.subjects.forEach(subject => {
+                    const subjectCard = document.createElement('div');
+                    
+                    // Determine subject class for styling
+                    let subjectClass = '';
+                    if (subject.name.includes('Marketing')) subjectClass = 'marketing';
+                    else if (subject.name.includes('Statistics') || subject.name.includes('Stats')) subjectClass = 'stats';
+                    else if (subject.name.includes('Macro')) subjectClass = 'macro';
+                    else if (subject.name.includes('Banking')) subjectClass = 'banking';
+                    else if (subject.name.includes('Communication')) subjectClass = 'communication';
+                    else if (subject.name.includes('Leadership')) subjectClass = 'leadership';
+                    else if (subject.name.includes('Yoga')) subjectClass = 'yoga';
+                    else if (subject.name.includes('Mixed')) subjectClass = 'mixed';
+                    else if (subject.name.includes('All')) subjectClass = 'all';
+                    
+                    subjectCard.className = `subject-card ${subjectClass}`;
+                    
+                    const subjectInfo = document.createElement('div');
+                    subjectInfo.className = 'subject-info';
+                    
+                    const subjectName = document.createElement('div');
+                    subjectName.className = 'subject-name';
+                    
+                    // Set icon based on subject
+                    let icon = '';
+                    if (subjectClass === 'marketing') icon = '<i class="fas fa-bullhorn"></i>';
+                    else if (subjectClass === 'stats') icon = '<i class="fas fa-chart-bar"></i>';
+                    else if (subjectClass === 'macro') icon = '<i class="fas fa-money-bill-wave"></i>';
+                    else if (subjectClass === 'banking') icon = '<i class="fas fa-university"></i>';
+                    else if (subjectClass === 'communication') icon = '<i class="fas fa-comments"></i>';
+                    else if (subjectClass === 'leadership') icon = '<i class="fas fa-users"></i>';
+                    else if (subjectClass === 'yoga') icon = '<i class="fas fa-spa"></i>';
+                    else icon = '<i class="fas fa-book"></i>';
+                    
+                    subjectName.innerHTML = `${icon} ${subject.name}`;
+                    subjectInfo.appendChild(subjectName);
+                    
+                    const subjectModule = document.createElement('div');
+                    subjectModule.className = 'subject-module';
+                    subjectModule.textContent = subject.module;
+                    subjectInfo.appendChild(subjectModule);
+                    
+                    // Add objectives if they exist
+                    if (subject.objectives && subject.objectives.length > 0) {
+                        const objectivesDiv = document.createElement('div');
+                        objectivesDiv.style.marginTop = '8px';
+                        objectivesDiv.style.fontSize = '14px';
+                        
+                        const objectivesTitle = document.createElement('div');
+                        objectivesTitle.style.fontWeight = '500';
+                        objectivesTitle.style.marginBottom = '5px';
+                        objectivesTitle.innerHTML = '<i class="fas fa-bullseye"></i> Learning Objectives:';
+                        objectivesDiv.appendChild(objectivesTitle);
+                        
+                        const objectivesList = document.createElement('ul');
+                        objectivesList.style.margin = '0';
+                        objectivesList.style.paddingLeft = '20px';
+                        subject.objectives.forEach(obj => {
+                            const li = document.createElement('li');
+                            li.textContent = obj;
+                            objectivesList.appendChild(li);
+                        });
+                        objectivesDiv.appendChild(objectivesList);
+                        subjectInfo.appendChild(objectivesDiv);
+                    }
+                    
+                    // Add resources if they exist
+                    if (subject.resources && subject.resources.length > 0) {
+                        const resourcesDiv = document.createElement('div');
+                        resourcesDiv.style.marginTop = '8px';
+                        resourcesDiv.style.fontSize = '14px';
+                        
+                        const resourcesTitle = document.createElement('div');
+                        resourcesTitle.style.fontWeight = '500';
+                        resourcesTitle.style.marginBottom = '5px';
+                        resourcesTitle.innerHTML = '<i class="fas fa-bookmark"></i> Key Resources:';
+                        resourcesDiv.appendChild(resourcesTitle);
+                        
+                        const resourcesList = document.createElement('div');
+                        subject.resources.forEach(res => {
+                            const tag = document.createElement('span');
+                            tag.style.display = 'inline-block';
+                            tag.style.margin = '0 5px 5px 0';
+                            tag.style.padding = '3px 8px';
+                            tag.style.backgroundColor = '#e0e0e0';
+                            tag.style.borderRadius = '4px';
+                            tag.style.fontSize = '13px';
+                            tag.textContent = res;
+                            resourcesList.appendChild(tag);
+                        });
+                        resourcesDiv.appendChild(resourcesList);
+                        subjectInfo.appendChild(resourcesDiv);
+                    }
+                    
+                    subjectCard.appendChild(subjectInfo);
+                    
+                    const timeAllocation = document.createElement('div');
+                    timeAllocation.className = 'time-allocation';
+                    
+                    for (const [type, time] of Object.entries(subject.time_allocation)) {
+                        const timeBlock = document.createElement('div');
+                        timeBlock.className = 'time-block';
+                        
+                        let icon = '';
+                        if (type === 'CL') icon = '<i class="fas fa-chalkboard-teacher"></i> Classroom Learning';
+                        else if (type === 'R') icon = '<i class="fas fa-book-reader"></i> Revision';
+                        else if (type === 'PA') icon = '<i class="fas fa-pen-fancy"></i> Practice';
+                        
+                        timeBlock.innerHTML = `${icon}: ${time}`;
+                        timeAllocation.appendChild(timeBlock);
+                    }
+                    
+                    subjectCard.appendChild(timeAllocation);
+                    dayCard.appendChild(subjectCard);
+                });
+                
+                container.appendChild(dayCard);
+            });
+            
+            // Animate progress bars
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 100);
+            });
+        }
+
+        // Call the function when the page loads
+        window.onload = renderStudyPlan;
+    </script>
+</body>
+</html>
